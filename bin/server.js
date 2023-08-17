@@ -2,14 +2,15 @@ const http = require("http");
 const app = require("../src/app");
 const port = searchPort(process.env.PORT || "3000");
 const server = http.createServer(app);
-console.log(server);
+
 server.listen(port);
 server.on('error', onError);
-server.on('listening', onListenig);
+server.on('listen', onListening);
 
 console.log(`Api works on port ${port}`);
 
 function searchPort(portValue) {
+
   const port = parseInt(portValue, 10);
 
   if (isNaN(port))
@@ -42,12 +43,12 @@ function onError(error) {
     default:
       throw error;
   }
+}
 
-  function onListenig() {
-    var addr = server.address();
-    var bind = typeof addr === 'string' ?
-      `pipe ${addr}` :
-      `${addr.family}:${addr.port}`;
-    debug('Listening on' + bind)
-  }
+function onListening() {
+  const addr = server.address();
+  const bind = typeof addr === 'string' ?
+    `pipe ${addr}` :
+    `${addr.family}:${addr.port}`;
+  debug('Listening on' + bind)
 }
