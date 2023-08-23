@@ -5,6 +5,16 @@ exports.getAllProducts = async(req, res, next) => {
     res.status(200).send(allActiveProducts);
 }
 
+exports.getProductById = async(req, res, next) => {
+    const productId = req.params.id;
+    const product = productRepository.getProductById(productId);
+
+    if (product) 
+        res.status(404).send();
+        
+    res.status(200).send(product);
+}
+
 exports.createProduct = async(req, res, next) => {
     await productRepository.createProduct(req.body);
     console.log(res, 'quero saber o que tem dentro desse res....');
