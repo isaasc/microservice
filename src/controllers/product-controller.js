@@ -17,8 +17,7 @@ exports.getProductById = async(req, res, next) => {
 
 exports.createProduct = async(req, res, next) => {
     await productRepository.createProduct(req.body);
-    console.log(res, 'quero saber o que tem dentro desse res....');
-    res.status(201).send("Product created", req.body);
+    res.status(201).send("Product created");
 }
 
 exports.updateProductById = async(req, res, next) => {
